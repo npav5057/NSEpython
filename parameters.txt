@@ -1,0 +1,38 @@
+100	        # nx
+100        # ny
+1.0	        # Side a length
+1.0	        # Side b length
+1.0 	    # Time to integrate
+10.0 	    # Reynolds number
+0.0 	    # x-component of g
+0.0 	    # y-component of g
+60         # Maximum iterations.
+1.0		    # Security factor tau.
+1.7         # Relaxation factor for SOR. (1.0 is Gaus-Seidel)
+0.0001      # Relative tolerance for SOR.
+
+
+0.0           #uinit
+0.0           #vinit
+0.0           #pinit
+0.0           #ul
+1.0           #ur
+0.0           #vt
+0.0           #vb
+0.01          #mu 
+1.0           #rho
+1.0           #running time
+
+________________
+20          # nx
+20          # ny
+1.0	        # Side a length
+1.0	        # Side b length
+10.0 	    # Time to integrate
+300.0 	# Reynolds number
+0.0 	    # x-component of g
+0.0 	    # y-component of g
+1.0		    # Security factor tau.
+1.7         # Relaxation factor for SOR. (1.0 is Gaus-Seidel)
+0.0001      # Relative tolerance for SOR.
+20         # Maximum iterations for SOR.
