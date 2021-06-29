@@ -44,7 +44,7 @@ if(len(files)>3000):
     files=files[::10]
 
 # exit()
-data = np.load(files[0])
+data = np.load(files[10])
 u=data['vx']
 v=data['vy']
 # v=v[::10]
@@ -56,7 +56,11 @@ s = np.sqrt(u**2+ v**2)
 u_red = resize(u,(11,11))
 v_red = resize(v,(11,11))
 
-print(v_red.shape)
+print(u.shape)
+print(len(files))
+
+X,Y = np.meshgrid(np.linspace(0, 1,u.shape[0]), np.linspace(0, 1, u.shape[1]))
+
 
 fig = plt.figure(1, [5, 5])
 ax = fig.gca()
@@ -80,9 +84,10 @@ vec = ax.quiver(Y, X, u_red, v_red, scale=1.0, color="white")
 
 
 plt.tight_layout()
+plt.xlabel("X Axis")
+plt.ylabel("Y Axis")
 
 def animate(n):
-
     data = np.load(files[n])
     u=data['vx']
     v=data['vy']
@@ -94,11 +99,12 @@ def animate(n):
     u_red = resize(u, (11, 11))
     v_red = resize(v, (11, 11))
     vec.set_UVC(u_red, v_red)
-    ax.text
+    t=n/(len(files)-1)
+    ax.set_title("Velocity at time:{}".format(t))
+    # plt.savefig("Vel{}.png".format(t))
     return speed, vec
 writer = myPillow()
 writer.fps = 1
 animation = anim.FuncAnimation(fig, animate, frames=len(files), interval = 2, blit=True)
-animation.save('Re1_50x50_v.gif', writer=writer)
-
-# plt.savefig("flow.pdf")
+file="_{}_vel.gif".format(sys.argv[1])
+animation.save(file, writer=writer)
