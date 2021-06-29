@@ -47,7 +47,7 @@ ax = fig.gca()
 
 # Plot colormap.
 cmap = mpl.cm.get_cmap('viridis')
-norm = BoundaryNorm(np.linspace(-0.1, 0.1, 21), cmap.N);
+norm = BoundaryNorm(np.linspace(-0.2, 0.2, 21), cmap.N);
 speed = ax.imshow(p, norm = norm, origin = "lower", cmap=cmap, extent = (0, 1, 0, 1))
 
 # Plot colorbar.
@@ -57,17 +57,23 @@ bar = fig.colorbar(speed, cax=cax, orientation='vertical')
 bar.locator = mpl.ticker.MultipleLocator(0.02)
 bar.update_ticks()
 plt.tight_layout()
+plt.xlabel("X Axis")
+plt.ylabel("Y Axis")
 
 def animate(n):
     data = np.load(files[n])
     p=data['pre']
     # print(p[1:-1,1:-1])
     speed.set_data(p)
+    speed.set
+    t=n/(len(files)-1)
+    ax.set_title("Pressure at time:{}".format(t))
+    # plt.savefig("pre{}.png".format(t))
     if(n%10==0):
         print("Frame "  + str(n))
     return speed,
 writer = myPillow()
-writer.fps = 2
-animation = anim.FuncAnimation(fig, animate, frames=len(files), interval = 1, blit=True)
-animation.save('Re1_50x50_p.gif', writer=writer)
-
+writer.fps = 1
+animation = anim.FuncAnimation(fig, animate, frames=len(files), interval = 2, blit=True)
+file="_{}_pres.gif".format(sys.argv[1])
+animation.save(file, writer=writer)
